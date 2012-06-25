@@ -7,6 +7,14 @@
 $(document).ready(function() {
   /* Activating Best In Place */
   jQuery(".best_in_place").best_in_place();
+  jQuery(".best_in_place").on("ajax:error", function(event, response){
+    jQuery.each(jQuery.parseJSON(response), function(index, value) {
+      if( typeof(value) == "object") {value = index + " " + value.toString(); }
+      var container = jQuery("<span class='flash-error'></span>").html(value);
+      container.purr();
+    });
+  });
+
 });
 
 /* Inicialització en català per a l'extenció 'calendar' per jQuery. */
